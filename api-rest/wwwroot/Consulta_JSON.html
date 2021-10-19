@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+
+            function leerJson() {
+
+                var dato = document.getElementById("dato").value;
+
+                var jsonString = "articulo=" + encodeURIComponent(dato);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "http://www.informaticasc2.com/webs/esi2/alberto/bares2/ConsultaVentas.php", true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.setRequestHeader("Content-Length", jsonString.length);
+
+                //alert(xmlhttp.readyState + "--"+xmlhttp.status);
+
+                xmlhttp.onreadystatechange = function ()
+                {
+                    	alert(xmlhttp.readyState + "--"+xmlhttp.status);
+                    if (xmlhttp.readyState === 4 && (xmlhttp.status === 200)) {
+                        var datosLeidos = xmlhttp.responseText;
+                        alert("Datos Recibidos :" + datosLeidos);
+                        var Registros = eval('(' + datosLeidos + ')');
+                        // alert(Registros.length );
+                        //  alert(Registros[0].articulo);
+                        //  alert(Registros[0].precio);
+                        //  alert(Registros[0].imagen);
+                        imprimirentabla(Registros);
+                    }
+                }
+                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.send(jsonString);
+
+
+            }
+
+            function leerJsonGet() {
+
+                var dato = document.getElementById("dato").value;
+
+                var jsonString = "articulo=" + encodeURIComponent(dato);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", "http://www.informaticasc2.com/webs/esi2/alberto/bares2/ConsultaVentasGet.php?articulo=" + encodeURIComponent(dato), true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.setRequestHeader("Content-Length", jsonString.length);
+
+                //alert(xmlhttp.readyState + "--"+xmlhttp.status);
+
+                xmlhttp.onreadystatechange = function ()
+                {
+                     	alert(xmlhttp.readyState + "--"+xmlhttp.status);
+                    if (xmlhttp.readyState === 4 && (xmlhttp.status === 200)) {
+                        var datosLeidos = xmlhttp.responseText;
+                        alert("Datos Recibidos :" + datosLeidos);
+                        var Registros = eval('(' + datosLeidos + ')');
+                        // alert(Registros.length );
+                        //  alert(Registros[0].articulo);
+                        //  alert(Registros[0].precio);
+                        //  alert(Registros[0].imagen);
+                        imprimirentabla(Registros);
+                    }
+                }
+                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.send(null);
+
+
+            }
+            function imprimirentabla(Registros)
+            {
+                var tabla = document.getElementById("tabla");
+                var cuerpo = document.getElementById("cuerpo");
+
+                // Borrar los TR del cuerpo menos los 2 primeros que son el titulo(th) y la fila de campos
+                while (cuerpo.getElementsByTagName("tr").length > 2) {
+                     alert(cuerpo.getElementsByTagName("tr").length)
+                    // Borra el úktimo elemento contenido en el cuerpo
+                    cuerpo.removeChild(cuerpo.lastChild);
+                }
+
+
+
+                for (c = 0; c < Registros.length; c++)
+                {
+
+
+
+                    linea = document.createElement("tr");
+                    parrafo = document.createElement("p");
+                    dato = document.createTextNode(Registros[c].articulo);
+                    Columna = document.createElement("td");
+                    Columna.appendChild(dato);
+                    linea.appendChild(Columna);
+
+                    parrafo = document.createElement("p");
+                    dato = document.createTextNode(Registros[c].precio);
+                    Columna = document.createElement("td");
+                    Columna.appendChild(dato);
+                    linea.appendChild(Columna)
+                    
+
+                    laimagen = document.createElement("img");
+                    var enlace = Registros[c].imagen;
+                    enlace = enlace.replace("\\", "");
+                    //alert(enlace);
+                    //    http:\/\/www.elcompas.com\/images\/fv033l.jpg
+
+                    laimagen.src = enlace;//Registros[c].imagen;
+                    laimagen.alt = enlace;//Registros[c].imagen;
+                    laimagen.style.width = "50px";
+                    laimagen.style.height = "50px";
+                    Columna = document.createElement("td");
+                    Columna.appendChild(laimagen);
+                    linea.appendChild(Columna)
+                    
+                    cuerpo.appendChild(linea);
+                }
+                tabla.appendChild(cuerpo);
+
+            }
+        </script>
+    </head>
+    <body>
+        Articulo a Busacar ("" Todos) <input type="text" value="" title="Teclea fanta" name="nif" id="dato"/>
+        <input  name="LeerJson_POST" value="Leer JSON LeerJson_POST" type="button" onClick="leerJson()"/>
+        <input  name="LeerJson_GET" value="Leer JSON GET" type="button" onClick="leerJsonGet()"/>
+
+        <table border="2px" style="width: 100%;border:2px fuchsia solid" id="tabla">
+            <tbody id="cuerpo" >
+            <th>http://www.informaticasc2.com/webs/esi2/alberto/bares2/ConsultaVentasGet.php?articulo   ----- user : s1037944 password : rqcp5ne8</th>
+            <tr>
+                <td style="height: 25px">Articulo</td>
+                <td style="height: 25px">Precio</td>
+                <td style="height: 25px">Imagen</td>
+
+            </tr>
+            <tr></tr>
+        </tbody>
+    </table>
+</body>
+</html>

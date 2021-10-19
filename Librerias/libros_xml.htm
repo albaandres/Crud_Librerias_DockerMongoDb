@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<xml id="datosXml" src="libro.xml"></xml>
+	<script src="datos.js"></script>
+	<title>Datos Arboles</title>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+	 
+		datos = new Array();
+
+		var contador = 0; var pos = 0;
+
+		function datoslibro(ISBN, Autor, Titulo, Editorial, Paginas) {
+			this.ISBN = ISBN;
+			this.Autor = Autor;
+			this.Titulo = Titulo;
+			this.Editorial = Editorial;
+			this.Paginas = Paginas;
+
+			this.guarda = guardadatos;
+
+		}
+
+		function guardadatos() {
+			alert(this.ISBN);
+			datos[contador] = this;
+			contador = contador + 1;
+			pos = contador;
+		}
+
+
+		function leerdatos(c) {
+			var da = new datoslibro();
+			da = datos[c];
+			document.write("<tr><td>" + da.ISBN + "</td><td>" + da.Titulo + "</td><td>" + da.Autor + "</td><td>" + da.Editorial + "</td><td>" + da.Paginas + "</td></tr>");
+
+		}
+
+
+
+
+		//////////////////////////////////// G R A B A R //////////////////////////////////
+		function grabar() {
+			var ISBN = document.getElementById("iISBN").value;
+			var Autor = document.getElementById("Autor").value;
+			var Titulo = document.getElementById("Titulo").value;
+			var Editorial = document.getElementById("Editorial").value;
+			var Paginas = document.getElementById("Paginas").value;
+
+			libro = new datoslibro(ISBN, Autor, Titulo, Editorial, Paginas);
+			libro.guarda();
+
+
+		}
+
+		//////////////////////////////////// G R A B A R //////////////////////////////////
+
+		/*
+		while(especie!='*')
+		{
+		
+		poblacion=prompt("Población");
+		zona=prompt("Zona");
+		latitud=prompt("Latitud");
+		longitud=prompt("Longitud");
+		tamaño=prompt("Tamaño");
+		estado=prompt("Estado");
+		
+		arbol=new datosArbol(especie,poblacion,zona,latitud,longitud,tamaño,estado);
+		arbol.guarda();
+		 
+		especie= prompt("Especie(*Fin)","Pino");
+		}*/
+
+		// //////////////////// i m p r i m i r /////////////////////////
+		function imprimir() {
+			document.write("<h1>Listado de Libros</h1><table border='2'>");
+			for (c = 0; c < contador; c++) {
+				leerdatos(c);
+
+			}
+			document.write("</table>");
+		}
+		// //////////////////// i m p r i m i r /////////////////////////
+
+		function siguiente() {
+			pos = pos + 1; visualiza(pos);
+		}
+		function anterior() {
+			pos = pos - 1; visualiza(pos);
+		}
+		function visualiza(pos) {
+			libro = new datoslibro();
+			libro = datos[pos];
+			if(libro==undefined){return;}
+		
+			document.getElementById("iISBN").value = libro.ISBN;
+
+			document.getElementById("Autor").value = libro.Autor;
+			document.getElementById("Titulo").value = libro.Titulo;
+			document.getElementById("Editorial").value = libro.Editorial;
+			document.getElementById("Paginas").value = libro.Paginas;
+
+		}
+		function imprimirentabla() {
+
+			for (c = 0; c < contador; c++) {
+				var da = new datoslibro();
+				da = datos[c];
+				var tabla = document.getElementById("tabla");
+				var cuerpo = document.getElementById("cuerpo");
+				linea = document.createElement("tr");
+				parrafo = document.createElement("p");
+				dato = document.createTextNode(da.ISBN);
+				Columna = document.createElement("td");
+				Columna.appendChild(dato);
+				linea.appendChild(Columna);
+
+				parrafo = document.createElement("p");
+				dato = document.createTextNode(da.Titulo);
+				Columna = document.createElement("td");
+				Columna.appendChild(dato);
+				linea.appendChild(Columna)
+
+
+				parrafo = document.createElement("p");
+				dato = document.createTextNode(da.Autor);
+				Columna = document.createElement("td");
+				Columna.appendChild(dato);
+				linea.appendChild(Columna)
+				parrafo = document.createElement("p");
+				dato = document.createTextNode(da.Editorial);
+				Columna = document.createElement("td");
+				Columna.appendChild(dato);
+				linea.appendChild(Columna)
+
+				parrafo = document.createElement("p");
+				dato = document.createTextNode(da.Paginas);
+				Columna = document.createElement("td");
+				Columna.appendChild(dato);
+				linea.appendChild(Columna)
+
+				cuerpo.appendChild(linea);
+			}
+			tabla.appendChild(cuerpo);
+		}
+		function cargaXml() {
+
+
+
+
+			var codigo = new DOMParser();
+			var myXml = codigo.parseFromString(datosFichero, "text/xml");
+
+
+			var aisbn = new Array();
+			var atitulo = new Array();
+			var aautor = new Array();
+			var aeditorial = new Array();
+			var apaginas = new Array();
+
+			aisbn = myXml.getElementsByTagName("isbn");
+			atitulo = myXml.getElementsByTagName("titulo");
+			aautor = myXml.getElementsByTagName("autor");
+			aeditorial = myXml.getElementsByTagName("editorial");
+			apaginas = myXml.getElementsByTagName("paginas");
+			//alert(aisbn.length);
+			for (var i = 0; i < aisbn.length; i++) {
+				// alert(aisbn);
+				p = new datoslibro(aisbn.item(i).firstChild.nodeValue, atitulo.item(i).firstChild.nodeValue, aautor.item(i).firstChild.nodeValue, aeditorial.item(i).firstChild.nodeValue, apaginas.item(i).firstChild.nodeValue);
+
+				datos[i] = p;
+
+			}
+			c = i; contador = c;
+			visualiza(0);
+		}
+
+
+	</script>
+	<style type="text/css">
+		h1 {
+			text-align: center;
+			font-family: "Courier New", Courier, "espacio sencillo";
+			font-size: 16px;
+			background-color: #CCFF99;
+
+		}
+	</style>
+</head>
+
+<body onload="cargaXml()">
+
+	<div style="height: 249px">
+		<h1>Datos Libros</h1>
+
+		<table style="width: 100%">
+			<tr>
+				<td style="width: 146px">ISBN</td>
+				<td>
+
+					<input id="iISBN" type="text" style="width: 257px" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 146px; height: 26px;">Titulo</td>
+
+				<td style="height: 26px">
+
+					<input id="Titulo" type="text" style="width: 377px" />
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 146px">Autor&nbsp;</td>
+				<td>
+
+					<input id="Autor" type="text" style="width: 241px; height: 19px;" />
+				</td>
+			</tr>
+
+			<tr>
+				<td style="width: 146px">Editorial</td>
+				<td>
+
+					<input id="Editorial" type="text" style="width: 155px" />
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 146px">Número de Paginas</td>
+				<td>
+
+
+					<input id="Paginas" type="text" style="width: 158px" />
+				</td>
+			</tr>
+			<tr>
+
+				<td style="width: 146px">&nbsp;</td>
+				<td>
+
+					&nbsp;</td>
+			</tr>
+		</table>
+
+
+		<input name="Button1" type="button" value="Grabar Datos" onclick="grabar();" />
+
+
+		<input name="Button2" type="button" value="Imprimir Datos" onclick="imprimir();" />
+		<input name="Button5" type="button" value="Imprimir en la Tbala" style="width: 227px"
+			onclick="imprimirentabla()" />
+
+		<input name="Button3" type="button" value="Siguiente" onclick="siguiente()" />
+		<input name="Button4" type="button" value="Anterior" onclick="anterior()" /><br />
+
+	</div>
+	<table border="2px" style="width: 100%;border:2px fuchsia solid" id="tabla">
+		<tbody id="cuerpo">
+			<tr>
+				<td style="height: 25px">ISBN</td>
+				<td style="height: 25px">TITULO</td>
+				<td style="height: 25px">AUTOR</td>
+				<td style="width: 482px; height: 25px;">EDITORIAL</td>
+				<td style="height: 25px">Nº DE PAGINAS</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="c:\windows/system32/notepad.exe">notepad</a>
+</body>
+
+</html>

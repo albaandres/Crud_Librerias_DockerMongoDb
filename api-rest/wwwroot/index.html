@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>To-do CRUD</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <script type="text/javascript">
+
+    </script>
+</head>
+
+<body>
+    <h5> CRUD https://docs.microsoft.com/es-es/aspnet/core/tutorials/web-api-javascript?view=aspnetcore-5.0</h5>
+    <h3>Add</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+        <table>
+            <tr>
+                <th>nombre</th>
+                <th>especialidad</th>
+                <th>calle</th>
+                <th>longitud</th>
+                <th>latitud</th>
+                <th>numero</th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="text" id="add-nombre">
+                </th>
+                <th>
+                    <input type="text" id="add-especialidad">
+                </th>
+                <th>
+                    <input type="text" id="add-calle">
+                </th>
+                <th>
+                    <input type="text" id="add-longitud">
+                </th>
+                <th>
+                    <input type="text" id="add-latitud">
+                </th>
+                <th>
+                    <input type="text" id="add-numero">
+                </th>
+            </tr>
+        </table>
+        <input type="submit" value="Añadir registro">
+    </form>
+
+    <div id="editForm">
+        <h3>Edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="hidden" id="edit-id">
+            <input type="text" id="edit-nombre">
+            <input type="text" id="edit-especialidad">
+            <input type="text" id="edit-calle">
+            <input type="text" id="edit-longitud">
+            <input type="text" id="edit-latitud">
+            <input type="text" id="edit-numero">
+            <input type="submit" value="Save">
+            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </form>
+    </div>
+
+    <p id="counter">Nº de Registros</p>
+
+    <table>
+        <tr>
+            <th>nombre</th>
+            <th>especialidad</th>
+            <th>calle</th>
+            <th>longitud</th>
+            <th>latitud</th>
+            <th>numero</th>
+        </tr>
+        <tbody id="todos"></tbody>
+        <input type="button" onclick="getItems()" value="Leer"></input>
+    </table>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+     //  getItems();
+    </script>
+</body>
+
+</html>

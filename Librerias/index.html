@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Ejemplo de HTML5">
+  <meta name="keywords" content="HTML5, CSS3, JavaScript">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <link rel="shortcut icon" href="./imagenes/Logo.png">
+  <title>Plantilla</title>
+  <link rel="stylesheet" href="./css/plantilla.css">
+  <script src="datos.js"></script>
+  <script src="./js/funciones.js"></script>
+</head>
+
+<body>
+  <div id="contenedor">
+    <header id="cabecera">
+
+      
+        <picture style="margin: 5px;">
+          <source media="(min-width: 500px)" srcset="imagenes/LogoPlantilla.png">
+          <img id="imagenTitulo" src="imagenes/Logop.png" alt="Logo CIFP">
+        </picture>
+        <h1 id="titulo">Crud Array Libros </h1>
+
+      
+    </header>
+    <nav id="menu">
+      <input type="checkbox" id="menuopciones">
+      <label for="menuopciones"> ☰ </label>    
+      <ul>
+        <li id="bGrabar">Grabar</li>
+        <li id="bModificar">Modificar</li>
+        <li id="bBorrar">Borrar</li>
+        <li id="bSiguiente">Siguiente</li>
+        <li id="bAnterior">Anterior</li>
+        <li id="bTabla">Tabla</li>
+      </ul>
+
+    </nav>
+    <section id="seccion">
+      <article>
+        <header>
+          <hgroup>
+            <h1>Registro Libro</h1>
+             
+          </hgroup>
+          
+        </header>
+       
+        <figure>
+          <img src="./imagenes/Logo.png" >
+          <figcaption>
+            Esta es la imagen del primer mensaje
+          </figcaption>
+        </figure>
+        <body>
+          <table  style="width: 100%">
+            <tr>
+              <td style="width: 146px">nombre</td>
+              <td>
+                      <input id="nombre" type="text" style="width: 257px" value="" />
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 146px; height: 26px;">especialidad</td>
+      
+              <td style="height: 26px">
+      
+                <input id="especialidad" type="text" style="width: 377px" />
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 146px">calle&nbsp;</td>
+              <td>
+      
+                <input id="calle" type="text" style="width: 241px; height: 19px;" />
+              </td>
+            </tr>
+      
+            <tr>
+              <td style="width: 146px">longitud</td>
+              <td>
+      
+                <input id="longitud" type="text" style="width: 155px" />
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 146px">latitud</td>
+              <td>
+      
+                <input id="latitud" type="text" style="width: 155px" />
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 15px">Nº </td>
+              <td>
+      
+      
+                <input id="numero" type="text" style="width: 158px" />
+              </td>
+            </tr>
+            <tr>
+      
+              <td style="width: 146px">&nbsp;</td>
+              <td>
+      
+                &nbsp;</td>
+            </tr>
+          </table>
+      
+      
+        </body>
+        <footer>
+         
+        </footer>
+      </article>
+      <article>
+        <header>
+          <hgroup>
+            <h1>Tabla Articulos</h1>        
+        </header>
+        <table id="tabla" class="tablaLibros">
+          <thead><p id="pnr">Nº de Registros:</p></thead>
+          <tbody id="cuerpo">
+            <tr>
+              <td style="height: 25px">nombre</td>
+              <td style="height: 25px">especialidad</td>
+              <td style="width: 482px; height: 25px;">calle</td>
+              <td style="height: 25px">longitud</td>
+              <td style="height: 25px">latitud</td>
+              <td style="height: 25px">Nº</td>
+            </tr>
+          </tbody>
+          </table>
+      
+      </article>
+    </section>
+    <aside id="columna">
+      <blockquote>Crud</blockquote>
+      <blockquote>Base de Datos</blockquote>
+      <blockquote>MongoDb -- BD No Sql</blockquote>
+      <blockquote>Docker</blockquote>
+      <blockquote>Node Js</blockquote>
+    </aside>
+    <footer id="pie">
+      Desarrollo de Aplicaciones Web(DAW) © CIFP Santa Catalina
+    </footer>
+  </div>
+
+
+<!--   API REST Mongo Db Docker Node Js-->
+<script src="./js/rutas.js"></script>
+
+
+</body>
+
+</html>

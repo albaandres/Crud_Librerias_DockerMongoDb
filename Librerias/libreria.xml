@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<librerias>
+<libreria>
+<nombre>Leon</nombre>
+<especialidad>libreria</especialidad>
+<calle>Pedrote</calle>
+<longitud>11111</longitud>
+<latitud>aaaaa</latitud>
+<numero>4</numero>
+</libreria>
+<libreria>
+<nombre>Icono</nombre>
+<especialidad>libreria</especialidad>
+<calle>Avda General Gutierrez</calle>
+<longitud>22222</longitud>
+<latitud>bbbbb</latitud>
+<numero>1</numero>
+</libreria>
+</librerias>
